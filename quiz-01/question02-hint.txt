@@ -1,0 +1,23 @@
+As example we use DFA above. Suppose function f(x, i) calculates how many there are binary input strings that gets us to state x on i-th input symbol. So  f(B, 0)  = f(C, 0) = f(D, 0) = 0 since A is the starting state and an empty string will not get us any further from starting state and similarly reasoning we get that f(A, 0) = 1, since there is an empty binary string that gets us to state A. Notice that if we would knew how many there are ways to get to B and C and we would have single input character left then the answer would be:
+ways to get to D = ways to get to B + ways to get to C. Using our function we can describe that like:
+f(D, i) = f(B, i - 1) + f(C, i - 1)
+and for other states:
+f(A, i) = f(D, i - 1)
+f(B, i) = f(A, i - 1) + f(D, i - 1)
+f(C, i) = f(A, i - 1).
+
+Now we are left with simple arithmetics, below are illiustrated function f values (i is input string length): 
+ i   A   B   C   D
+0   1   0   	0   0
+1   0   1    1   0
+2   0   0    0   2
+3   2  	2    0  	0
+4   0   2    2   2
+5   2   2    0  	4
+6   4   6   	2  	2
+7   2   6    4   8
+8   8 10    2 10
+9 10 18    8 12
+...
+
+Answer to our problem is f(D, i), where i is input string length provided in quiz.
